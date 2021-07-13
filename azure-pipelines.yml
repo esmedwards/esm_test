@@ -10,12 +10,17 @@ pool:
   Default
 
 steps:
-  - task: Docker@2
-    displayName: Build image
+  # - task: Docker@2
+  #   displayName: Build image
+  #   inputs:
+  #     repository: 'test-docker'
+  #     command: build
+  #     Dockerfile: Dockerfile
+  
+  - task: CmdLine@2
+    displayName: 'Build image'
     inputs:
-      repository: 'test-docker'
-      command: build
-      Dockerfile: Dockerfile
+      script: docker build -t test-docker:$(Build.BuildId) --disable-content-trust=true $(System.DefaultWorkingDirectory)/
 
 # - script: |
 #     python -m pip install --upgrade pip
