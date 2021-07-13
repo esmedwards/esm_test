@@ -22,6 +22,23 @@ steps:
     inputs:
       script: docker build -t test-docker:$(Build.BuildId) --disable-content-trust=true $(System.DefaultWorkingDirectory)/
 
+  - task: CmdLine@2
+    displayName: 'Docker Sign and Push'
+    inputs:
+      script: |
+        docker tag test-docker:$(Build.BuildId) test-docker:latest 
+        docker push test-docker:$(Build.BuildId) 
+        docker push test-docker:latest 
+
+  - task: CmdLine@2
+    displayName: 'Docker Verify'
+    inputs:
+      script: |
+        docker image rm test-docker:$(Build.BuildId) 
+        docker image rm test-docker:latest 
+        docker pull test-docker:$(Build.BuildId) 
+        docker pull test-docker
+
 # - script: |
 #     python -m pip install --upgrade pip
 #     pip install -r requirements.txt
