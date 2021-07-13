@@ -26,9 +26,9 @@ steps:
     displayName: 'Docker Sign and Push'
     inputs:
       script: |
-        docker tag test-docker:$(Build.BuildId) test-docker:latest 
-        docker push test-docker:$(Build.BuildId) 
-        docker push test-docker:latest 
+        docker tag test-docker:$(Build.BuildId) localhost:5000/test-docker:latest 
+        # docker push test-docker:$(Build.BuildId) 
+        docker push localhost:5000/test-docker:latest 
 
   - task: CmdLine@2
     displayName: 'Docker Verify'
@@ -36,8 +36,8 @@ steps:
       script: |
         docker image rm test-docker:$(Build.BuildId) 
         docker image rm test-docker:latest 
-        docker pull test-docker:$(Build.BuildId) 
-        docker pull test-docker
+        docker pull localhost:5000/test-docker:$(Build.BuildId) 
+        docker pull localhost:5000/test-docker
 
 # - script: |
 #     python -m pip install --upgrade pip
