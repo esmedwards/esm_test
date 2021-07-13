@@ -28,7 +28,7 @@ steps:
     inputs:
       script: |
         docker tag test-docker:$(Build.BuildId) localhost:5000/test-docker:latest 
-        # docker push test-docker:$(Build.BuildId) 
+        docker push test-docker:$(Build.BuildId) 
         docker push localhost:5000/test-docker:latest 
 
   - task: CmdLine@2
