@@ -10,55 +10,42 @@ pool:
   name: Default
   demands: agent.os -equals Linux
 
-jobs:
-- job: string
-  pool: server
-  steps:
-    - task: InvokeRESTAPI@1
-      inputs:
-        connectionType: 'connectedServiceName'
-        serviceConnection: 'https://prod-182.westus.logic.azure.com:443/workflows/f2ebd011a7e44136a47698627342c3a6/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=KqlrB0-N2fs7ArXlJV1evgtJiwoJHEfBHgQn2IpDxKk'
-        method: 'POST'
-        waitForCompletion: 'true'
-        successCriteria: 'eq(root[''status''], ''Approve'')'
-
-
-# steps:
-  # - task: Docker@2
-  #   displayName: Build image
-  #   inputs:
-  #     repository: 'test-docker'
-  #     command: build
-  #     Dockerfile: Dockerfile
+steps:
+  - task: Docker@2
+    displayName: Build image
+    inputs:
+      repository: 'test-docker'
+      command: build
+      Dockerfile: Dockerfile
   
-  # - task: CmdLine@2
-  #   displayName: 'Build image'
-  #   inputs:
-  #     script: docker build -t test-docker:$(Build.BuildId) --disable-content-trust=true $(System.DefaultWorkingDirectory)/
+  - task: CmdLine@2
+    displayName: 'Build image'
+    inputs:
+      script: docker build -t test-docker:$(Build.BuildId) --disable-content-trust=true $(System.DefaultWorkingDirectory)/
 
-  # - task: CmdLine@2
-  #   displayName: 'Docker Sign and Push'
-  #   inputs:
-  #     script: |
-  #       docker tag test-docker:$(Build.BuildId) localhost:5000/test-docker:latest 
-  #       docker push test-docker:$(Build.BuildId) 
-  #       docker push localhost:5000/test-docker:latest 
+  - task: CmdLine@2
+    displayName: 'Docker Sign and Push'
+    inputs:
+      script: |
+        docker tag test-docker:$(Build.BuildId) localhost:5000/test-docker:latest 
+        docker push test-docker:$(Build.BuildId) 
+        docker push localhost:5000/test-docker:latest 
 
-  # - task: CmdLine@2
-  #   displayName: 'Docker Verify'
-  #   inputs:
-  #     script: |
-  #       docker image rm test-docker:$(Build.BuildId) 
-  #       docker image rm test-docker:latest 
-  #       docker pull localhost:5000/test-docker:$(Build.BuildId) 
-  #       docker pull localhost:5000/test-docker
+  - task: CmdLine@2
+    displayName: 'Docker Verify'
+    inputs:
+      script: |
+        docker image rm test-docker:$(Build.BuildId) 
+        docker image rm test-docker:latest 
+        docker pull localhost:5000/test-docker:$(Build.BuildId) 
+        docker pull localhost:5000/test-docker
 
-# - script: |
-#     python -m pip install --upgrade pip
-#     pip install -r requirements.txt
-#   displayName: 'Install dependencies'
+  # - script: |
+  #     python -m pip install --upgrade pip
+  #     pip install -r requirements.txt
+  #   displayName: 'Install dependencies'
 
-# - script: |
-#     pip install pytest pytest-azurepipelines
-#     pytest
-#   displayName: 'pytest'
+  # - script: |
+  #     pip install pytest pytest-azurepipelines
+  #     pytest
+  #   displayName: 'pytest'
