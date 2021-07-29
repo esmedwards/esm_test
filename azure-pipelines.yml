@@ -3,13 +3,8 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
-# trigger:
-# - master
-
-resources:
-  webhooks:
-    - webhook: cs_watchdog          ### Webhook alias
-      connection: CodeSigningWatchdog    ### Incoming webhook service connection
+trigger:
+- master
 
 pool:
   name: Default 
