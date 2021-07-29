@@ -23,7 +23,7 @@ jobs:
         successCriteria: 'eq(root[''status''], ''Approve'')'
 
 
-steps:
+# steps:
   # - task: Docker@2
   #   displayName: Build image
   #   inputs:
