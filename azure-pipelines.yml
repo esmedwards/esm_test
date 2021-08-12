@@ -23,6 +23,23 @@ steps:
     inputs:
       script: docker build -t test-docker:$(Build.BuildId) --disable-content-trust=true $(System.DefaultWorkingDirectory)/
 
+  - task: AzureCLI@2
+    displayName: Content Trust Sign and Push
+    inputs:
+      azureSubscription: $(containerRegistryServiceConnection)
+      scriptType: bash
+      scriptLocation: inlineScript
+      inlineScript: |
+        az acr login -n $(acrName)
+        mkdir -p ~/.docker/trust/private
+        echo $(acr-frompipeline-signing-key) | base64 --decode > ~/.docker/trust/private/delegate.key
+        chmod 400 ~/.docker/trust/private/delegate.key
+        export DOCKER_CONTENT_TRUST_REPOSITORY_PASSPHRASE=$(repository-passphrase)
+        docker trust key load ~/.docker/trust/private/delegate.key --name delegationkey 
+        export DOCKER_CONTENT_TRUST=1
+        docker trust sign $(acrName)/$(imageRepository):$(tag)
+        docker trust inspect --pretty $(acrName)/$(imageRepository):$(tag)
+
   - task: CmdLine@2
     displayName: 'Docker Sign and Push'
     inputs:
