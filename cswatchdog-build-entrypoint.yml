@@ -18,7 +18,7 @@ variables:
   CERT_THUMBPRINT: '3b7b512bc32e8b50265d40659e1218902e8a1cc1'
 
 jobs: 
-- job: Invoke CS Watchdog
+- job: Invoke_CS_Watchdog
   pool: server
   continueOnError: true
   steps:
