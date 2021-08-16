@@ -13,19 +13,17 @@ variables:
   buildConfiguration: 'Release'
   CERT_THUMBPRINT: '3b7b512bc32e8b50265d40659e1218902e8a1cc1'
 
-jobs: 
-- job: Invoke_CS_Watchdog
-  pool: server
-  continueOnError: true
-  steps:
-  - task: InvokeRESTAPI@1
-    displayName: 'GET Member'
-    inputs:
-      connectionType: 'connectedServiceName'
-      serviceConnection: 'CS Watchdog Approval Flow Connection'
-      method: 'POST'
-      headers: '{Content-Type:application/json, PlanUrl: $(system.CollectionUri), ProjectId: $(system.TeamProjectId), HubName: $(system.HostType), PlanId: $(system.PlanId), JobId: $(system.JobId), TimelineId: $(system.TimelineId), TaskInstanceId: $(system.TaskInstanceId), AuthToken: $(system.AccessToken)}' 
-      #body: # Required when method != GET && Method != HEAD
-      #urlSuffix: # Optional
-      waitForCompletion: 'true'
-      #successCriteria: # Optional
+pool: server
+
+steps:
+- task: InvokeRESTAPI@1
+  displayName: 'GET Member'
+  inputs:
+    connectionType: 'connectedServiceName'
+    serviceConnection: 'CS Watchdog Approval Flow Connection'
+    method: 'POST'
+    headers: '{Content-Type:application/json, PlanUrl: $(system.CollectionUri), ProjectId: $(system.TeamProjectId), HubName: $(system.HostType), PlanId: $(system.PlanId), JobId: $(system.JobId), TimelineId: $(system.TimelineId), TaskInstanceId: $(system.TaskInstanceId), AuthToken: $(system.AccessToken)}' 
+    #body: # Required when method != GET && Method != HEAD
+    #urlSuffix: # Optional
+    waitForCompletion: 'true'
+    #successCriteria: # Optional
