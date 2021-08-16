@@ -18,10 +18,6 @@ variables:
   CERT_THUMBPRINT: '3b7b512bc32e8b50265d40659e1218902e8a1cc1'
 
 steps:
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
 
 - task: InvokeRESTAPI@1
   inputs:
