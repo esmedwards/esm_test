@@ -1,4 +1,4 @@
-# trigger: none
+trigger: none
 
 # resources:
 #   repositories:
@@ -7,11 +7,11 @@
 #       name: 'Viewfinder Common/DevOps'
 #       ref: refs/heads/develop
 
-# variables:
-#   solution: '**/*.sln'
-#   buildPlatform: 'Any CPU'
-#   buildConfiguration: 'Release'
-#   CERT_THUMBPRINT: '3b7b512bc32e8b50265d40659e1218902e8a1cc1'
+variables:
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+  CERT_THUMBPRINT: '3b7b512bc32e8b50265d40659e1218902e8a1cc1'
 
 jobs: 
 - job: Invoke_CS_Watchdog
