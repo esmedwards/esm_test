@@ -8,9 +8,6 @@ trigger:
 #       name: 'Viewfinder Common/DevOps'
 #       ref: refs/heads/develop
 
-pool:
-  server
-
 variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
@@ -22,7 +19,6 @@ jobs:
   pool: server
   continueOnError: true
   steps:
-
   - task: InvokeRESTAPI@1
     displayName: 'GET Member'
     inputs:
