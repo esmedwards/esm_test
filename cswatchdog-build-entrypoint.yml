@@ -1,0 +1,36 @@
+trigger:
+- none
+
+# resources:
+#   repositories:
+#     - repository: DevOps
+#       type: git
+#       name: 'Viewfinder Common/DevOps'
+#       ref: refs/heads/develop
+
+pool:
+  Default
+
+variables:
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+  CERT_THUMBPRINT: '3b7b512bc32e8b50265d40659e1218902e8a1cc1'
+
+steps:
+- script: |
+    echo Add other tasks to build, test, and deploy your project.
+    echo See https://aka.ms/yaml
+  displayName: 'Run a multi-line script'
+
+- task: InvokeRESTAPI@1
+  inputs:
+    connectionType: 'connectedServiceName' # Options: connectedServiceName, connectedServiceNameARM
+    #serviceConnection: # Required when connectionType == ConnectedServiceName
+    #azureServiceConnection: # Required when connectionType == ConnectedServiceNameARM
+    method: 'POST'
+    headers: '{Content-Type:application/json, PlanUrl: $(system.CollectionUri), ProjectId: $(system.TeamProjectId), HubName: $(system.HostType), PlanId: $(system.PlanId), JobId: $(system.JobId), TimelineId: $(system.TimelineId), TaskInstanceId: $(system.TaskInstanceId), AuthToken: $(system.AccessToken)}' 
+    #body: # Required when method != GET && Method != HEAD
+    #urlSuffix: # Optional
+    #waitForCompletion: 'false' # Options: true, false
+    #successCriteria: # Optional
