@@ -31,6 +31,6 @@ jobs:
       #       "isMultiBranch": "true",
       #       "branchName": "$(build.sourceBranchName)"
       #    }
-      urlSuffix: "workflows/af7c40aaa6d444ac807b3fb2bf60be8a/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=4g28FDXHg0gUsEeTQgMuf9Hw3jyWwkVEgL80TWU4Xos"
+      # urlSuffix: "workflows/af7c40aaa6d444ac807b3fb2bf60be8a/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=4g28FDXHg0gUsEeTQgMuf9Hw3jyWwkVEgL80TWU4Xos"
       waitForCompletion: 'true'
       #successCriteria: # Optional
