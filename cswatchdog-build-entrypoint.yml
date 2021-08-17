@@ -24,22 +24,13 @@ jobs:
       connectionType: 'connectedServiceName'
       serviceConnection: 'CS Watchdog Approval Flow Connection'
       method: 'POST'
-      headers: "{'Content-Type':'application/json', 'PlanUrl': '$(system.CollectionUri)', 'ProjectId': '$(system.TeamProjectId)', 'HubName': '$(system.HostType)', 'PlanId': '$(system.PlanId)', 'JobId': '$(system.JobId)', 'TimelineId': '$(system.TimelineId)', 'TaskInstanceId': '$(system.TaskInstanceId)', 'AuthToken': '$(system.AccessToken)'}" 
-      waitForCompletion: 'true'
-      successCriteria: 'eq(root[''status''], ''successful'')'
-  - task: InvokeRESTAPI@1
-    displayName: 'Get Approval'
-    inputs:
-      connectionType: 'connectedServiceName'
-      serviceConnection: 'CS Watchdog Approval Flow Connection'
-      method: 'POST'
-      headers: '{Content-Type:application/json, PlanUrl: $(system.CollectionUri), ProjectId: $(system.TeamProjectId), HubName: $(system.HostType), PlanId: $(system.PlanId), JobId: $(system.JobId), TimelineId: $(system.TimelineId), TaskInstanceId: $(system.TaskInstanceId), AuthToken: $(system.AccessToken)}' 
+      headers: "{'Content-Type':'application/json', 'PlanUrl': '$(system.CollectionUri)', 'ProjectId': '$(system.TeamProjectId)', 'HubName': '$(system.HostType)', 'PlanId': '$(system.PlanId)', 'JobId': '$(system.JobId)', 'TimelineId': '$(system.TimelineId)', 'TaskInstanceId': '$(system.TaskInstanceId)', 'AuthToken': '$(system.AccessToken)', 'QueuedBy': '$(build.QueuedBy)'}" 
       # body: |
       #    {
       #       "buildNumber": "$(build.buildId)",
       #       "isMultiBranch": "true",
       #       "branchName": "$(build.sourceBranchName)"
       #    }
-      # urlSuffix: "workflows/af7c40aaa6d444ac807b3fb2bf60be8a/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=4g28FDXHg0gUsEeTQgMuf9Hw3jyWwkVEgL80TWU4Xos"
+      urlSuffix: "&sig=4g28FDXHg0gUsEeTQgMuf9Hw3jyWwkVEgL80TWU4Xos"
       waitForCompletion: 'true'
-      #successCriteria: # Optional
+      successCriteria: 'eq(root[''status''], ''successful'')'
