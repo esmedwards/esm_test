@@ -17,6 +17,7 @@ variables:
 # - job: Invoke_CS_Watchdog
 #   pool: server
 #   continueOnError: true
+pool: server
 steps:
 - task: InvokeRESTAPI@1
   displayName: 'Get Approval'
