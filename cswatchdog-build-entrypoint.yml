@@ -24,7 +24,7 @@ jobs:
       connectionType: 'connectedServiceName'
       serviceConnection: 'CS Watchdog Approval Flow Connection'
       method: 'POST'
-      headers: '{Content-Type:"application/json"}' 
+      headers: '{"Content-Type":"application/json"}' 
       waitForCompletion: 'true'
       successCriteria: 'eq(root[''status''], ''successful'')'
   - task: InvokeRESTAPI@1
