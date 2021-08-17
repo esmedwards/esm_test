@@ -37,7 +37,10 @@ jobs:
             "JobId": "$(system.JobId)", 
             "TimelineId": "$(system.TimelineId)", 
             "TaskInstanceId": "$(system.TaskInstanceId)", 
-            "QueuedBy": "$(build.QueuedBy)"
+            "QueuedBy": "$(build.QueuedBy)",
+            "buildConfiguration": "$(buildConfiguration)",
+            "buildPlatform": "$(buildPlatform)",
+            "solution": "$(solution)"
          }
       urlSuffix: "&sig=4g28FDXHg0gUsEeTQgMuf9Hw3jyWwkVEgL80TWU4Xos"
       waitForCompletion: 'true'
