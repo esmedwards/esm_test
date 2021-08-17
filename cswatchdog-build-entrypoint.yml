@@ -44,4 +44,4 @@ jobs:
          }
       urlSuffix: "&sig=4g28FDXHg0gUsEeTQgMuf9Hw3jyWwkVEgL80TWU4Xos"
       waitForCompletion: 'true'
-      successCriteria: 'eq(root[''status''], ''successful'')'
+      successCriteria: eq(root["status"], "successful")
