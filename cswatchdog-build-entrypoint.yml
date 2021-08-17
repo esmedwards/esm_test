@@ -19,6 +19,7 @@ jobs:
   continueOnError: true
   steps:
   - task: InvokeRESTAPI@1
+    displayName: 'Get Approval'
     inputs:
       connectionType: 'connectedServiceName'
       serviceConnection: 'CS Watchdog Approval Flow Connection'
