@@ -43,5 +43,5 @@ jobs:
             "solution": "$(solution)"
          }
       urlSuffix: "&sig=4g28FDXHg0gUsEeTQgMuf9Hw3jyWwkVEgL80TWU4Xos"
-      waitForCompletion: 'true'
+      waitForCompletion: 'false'
       successCriteria: eq(root["status"], "successful")
