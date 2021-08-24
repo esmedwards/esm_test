@@ -10,7 +10,7 @@ trigger: none
 variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
-  buildConfiguration: 'Release'
+  buildConfiguration: 'Debug'#'Release'
   CERT_THUMBPRINT: '3b7b512bc32e8b50265d40659e1218902e8a1cc1'
 
 jobs: 
