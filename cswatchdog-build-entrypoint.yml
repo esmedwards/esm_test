@@ -10,7 +10,7 @@ trigger: none
 variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
-  buildConfiguration: 'Release'
+  buildConfiguration: 'Debug'#'Release'
   serviceConnection: 'CS Watchdog Approval Flow Connection'
 
 jobs: 
@@ -24,6 +24,8 @@ jobs:
       KeyVaultName: 'cswatchdog-external-kv'
       SecretsFilter: '*'
     displayName: 'Get key vault secrets as pipeline variables'
+  - bash: |
+      echo "Secret Found! $csw-digicert-token-development"
   - task: InvokeRESTAPI@1
     displayName: 'Get Approval'
     inputs:
