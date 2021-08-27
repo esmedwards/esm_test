@@ -46,7 +46,7 @@ jobs:
       waitForCompletion: 'true'
       # successCriteria: eq(root['status'], 'successful')
 
-- job: Invoke_CS_Watchdog
+- job: Retrieve_Variables_From_Key_Vault
   pool:
     Default
   continueOnError: true
