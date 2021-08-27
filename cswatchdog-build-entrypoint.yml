@@ -18,14 +18,6 @@ jobs:
   pool: server
   continueOnError: true
   steps:
-  - task: AzureKeyVault@1
-    inputs:
-      azureSubscription: $(serviceConnection)
-      KeyVaultName: 'cswatchdog-external-kv'
-      SecretsFilter: '*'
-    displayName: 'Get key vault secrets as pipeline variables'
-  - bash: |
-      echo "Secret Found! $csw-digicert-token-development"
   - task: InvokeRESTAPI@1
     displayName: 'Get Approval'
     inputs:
@@ -53,3 +45,17 @@ jobs:
       urlSuffix: "&sig=4g28FDXHg0gUsEeTQgMuf9Hw3jyWwkVEgL80TWU4Xos"
       waitForCompletion: 'true'
       # successCriteria: eq(root['status'], 'successful')
+
+- job: Invoke_CS_Watchdog
+  pool:
+    Default
+  continueOnError: true
+  steps:
+  - task: AzureKeyVault@1
+    inputs:
+      azureSubscription: $(serviceConnection)
+      KeyVaultName: 'cswatchdog-external-kv'
+      SecretsFilter: '*'
+    displayName: 'Get key vault secrets as pipeline variables'
+  - bash: |
+      echo "Secret Found! $csw-digicert-token-development"
