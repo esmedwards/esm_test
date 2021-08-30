@@ -69,3 +69,8 @@ jobs:
     inputs:
       script: |
         echo $(cs-watchdog-flow-access-token)
+        echo $(cs-watchdog-flow-trigger-sig)
+        echo $(sm-api-key)
+        echo $(sm-client-cert-password)
+        echo $(sm-client-cert-file)
+        echo $(sm-sign-cert-file)
