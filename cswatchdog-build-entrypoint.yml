@@ -74,4 +74,4 @@ jobs:
         echo $(sm-client-cert-password)
         echo "$(sm-client-cert-file)" >> pkcs11properties.cfg
         echo "$(sm-sign-cert-file)" >> signing.crt
-        echo "$sm-sign-cert-file" >> signing1.crt
+        echo "${sm-sign-cert-file}" >> signing1.crt
