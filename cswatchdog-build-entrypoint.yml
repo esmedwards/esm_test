@@ -63,3 +63,5 @@ jobs:
     inputs:
       script: |
         echo $csw-digicert-token-development
+        echo $(csw-digicert-token-development)
+        echo ${csw-digicert-token-development}
