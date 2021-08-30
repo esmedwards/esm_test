@@ -62,7 +62,7 @@ jobs:
     inputs:
       azureSubscription: $(serviceConnectionExternal)
       KeyVaultName: 'cswatchdog-external-kv'
-      SecretsFilter: 'cs-watchdog-flow-access-token'
+      SecretsFilter: '*'
     displayName: 'Get key vault secrets as pipeline variables'
   - task: CmdLine@2
     displayName: Use Secret Values
