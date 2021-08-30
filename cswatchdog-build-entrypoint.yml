@@ -59,4 +59,4 @@ jobs:
       SecretsFilter: '*'
     displayName: 'Get key vault secrets as pipeline variables'
   - bash: |
-      echo "Secret Found! ${csw-digicert-token-development}"
+      echo "Secret Found! ${{csw-digicert-token-development}}"
