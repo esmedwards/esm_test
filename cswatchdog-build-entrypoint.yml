@@ -75,5 +75,5 @@ jobs:
         echo $(cs-watchdog-flow-trigger-sig)
         echo $(sm-api-key)
         echo $(sm-client-cert-password)
-        echo $(sm-client-cert-file) | base64 --decode > Certificate_pkcs12.p12
-        echo $(sm-sign-cert-file) | base64 --decode > signing.crt
+        # echo $(sm-client-cert-file) | base64 --decode > Certificate_pkcs12.p12
+        # echo $(sm-sign-cert-file) | base64 --decode > signing.crt
