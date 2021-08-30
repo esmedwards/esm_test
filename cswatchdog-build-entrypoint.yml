@@ -49,7 +49,7 @@ jobs:
             "buildPlatform": "$(buildPlatform)",
             "solution": "$(solution)"
          }
-      urlSuffix: "&sig=$(cs-watchdog-flow-trigger-sig)"
+      urlSuffix: "&sig=$(sig)"
       waitForCompletion: 'true'
       # successCriteria: eq(root['status'], 'successful')
 
