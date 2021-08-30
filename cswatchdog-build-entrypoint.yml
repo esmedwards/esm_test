@@ -56,7 +56,7 @@ jobs:
     inputs:
       azureSubscription: $(serviceConnectionExternal)
       KeyVaultName: 'cswatchdog-external-kv'
-      SecretsFilter: '*'
+      SecretsFilter: 'csw-digicert-token-development'
     displayName: 'Get key vault secrets as pipeline variables'
   - task: CmdLine@2
     displayName: Use Secret Values
@@ -65,4 +65,3 @@ jobs:
         echo $csw-digicert-token-development
         echo $(csw-digicert-token-development)
         echo ${csw-digicert-token-development}
-        echo ${{csw-digicert-token-development}}
