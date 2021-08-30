@@ -8,7 +8,7 @@ trigger: none
 #       ref: refs/heads/develop
 
 variables:
-- group: my-variable-group
+- group: 'CS Watchdog Flow Variables'
 - name: solution
   value: '**/*.sln'
 - name: buildPlatform
