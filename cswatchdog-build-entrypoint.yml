@@ -58,5 +58,8 @@ jobs:
       KeyVaultName: 'cswatchdog-external-kv'
       SecretsFilter: '*'
     displayName: 'Get key vault secrets as pipeline variables'
-  - bash: |
-      echo $csw-digicert-token-development
+  - task: CmdLine@2
+    displayName: Use Secret Values
+    inputs:
+      script: |
+        echo $csw-digicert-token-development
