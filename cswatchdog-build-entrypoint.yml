@@ -12,6 +12,7 @@ variables:
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Debug'#'Release'
   serviceConnection: 'CS Watchdog Approval Flow Connection'
+  serviceConnectionExternal: 'watchdog_external'
 
 jobs: 
 - job: Invoke_CS_Watchdog
@@ -53,7 +54,7 @@ jobs:
   steps:
   - task: AzureKeyVault@1
     inputs:
-      azureSubscription: $(serviceConnection)
+      azureSubscription: $(serviceConnectionExternal)
       KeyVaultName: 'cswatchdog-external-kv'
       SecretsFilter: '*'
     displayName: 'Get key vault secrets as pipeline variables'
