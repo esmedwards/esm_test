@@ -8,11 +8,17 @@ trigger: none
 #       ref: refs/heads/develop
 
 variables:
-  solution: '**/*.sln'
-  buildPlatform: 'Any CPU'
-  buildConfiguration: 'Debug'#'Release'
-  serviceConnection: 'CS Watchdog Approval Flow Connection'
-  serviceConnectionExternal: 'watchdog_external'
+- group: my-variable-group
+- name: solution
+  value: '**/*.sln'
+- name: buildPlatform
+  value: 'Any CPU'
+- name: buildConfiguration
+  value: 'Debug'#'Release'
+- name: serviceConnection
+  value: 'CS Watchdog Approval Flow Connection'
+- name: serviceConnectionExternal
+  value: 'watchdog_external'
 
 jobs: 
 - job: Invoke_CS_Watchdog
@@ -25,7 +31,7 @@ jobs:
       connectionType: 'connectedServiceName'
       serviceConnection: 'CS Watchdog Approval Flow Connection'
       method: 'POST'
-      headers: "{'Content-Type':'application/json',  'AuthToken': '$(system.AccessToken)', 'runKey': 'EF46E8B9A759417468DBC7EB72433'}" 
+      headers: "{'Content-Type':'application/json',  'AuthToken': '$(system.AccessToken)', 'runKey': $(cs-watchdog-flow-access-token)}" 
       body: |
          {
             "buildNumber": "$(build.buildId)",
@@ -43,7 +49,7 @@ jobs:
             "buildPlatform": "$(buildPlatform)",
             "solution": "$(solution)"
          }
-      urlSuffix: "&sig=4g28FDXHg0gUsEeTQgMuf9Hw3jyWwkVEgL80TWU4Xos"
+      urlSuffix: "&sig=$(cs-watchdog-flow-trigger-sig)"
       waitForCompletion: 'true'
       # successCriteria: eq(root['status'], 'successful')
 
