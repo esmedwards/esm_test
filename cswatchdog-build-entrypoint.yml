@@ -62,6 +62,4 @@ jobs:
     displayName: Use Secret Values
     inputs:
       script: |
-        echo $cs-watchdog-flow-access-token
         echo $(cs-watchdog-flow-access-token)
-        echo ${cs-watchdog-flow-access-token}
