@@ -68,7 +68,8 @@ jobs:
     displayName: Use Secret Values
     inputs:
       azureSubscription: 'watchdog_external'
-      scriptType: 'batch'
+      scriptType: 'batch'  # Windows
+      # scriptType: 'bash'  # Linux
       scriptLocation: 'inlineScript'
       inlineScript: |
         echo $(cs-watchdog-flow-access-token)
