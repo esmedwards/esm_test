@@ -21,37 +21,37 @@ variables:
   value: 'watchdog_external'
 
 jobs: 
-# - job: Invoke_CS_Watchdog
-#   pool: server
-#   continueOnError: true
-#   steps:
-#   - task: InvokeRESTAPI@1
-#     displayName: 'Get Approval'
-#     inputs:
-#       connectionType: 'connectedServiceName'
-#       serviceConnection: 'CS Watchdog Approval Flow Connection'
-#       method: 'POST'
-#       headers: "{'Content-Type':'application/json',  'AuthToken': '$(system.AccessToken)', 'runKey': '$(cs-watchdog-flow-access-token)'}" 
-#       body: |
-#          {
-#             "buildNumber": "$(build.buildId)",
-#             "isMultiBranch": "true",
-#             "branchName": "$(build.sourceBranchName)",
-#             "PlanUrl": "$(system.CollectionUri)",
-#             "ProjectId": "$(system.TeamProjectId)",
-#             "HubName": "$(system.HostType)",
-#             "PlanId": "$(system.PlanId)",
-#             "JobId": "$(system.JobId)",
-#             "TimelineId": "$(system.TimelineId)",
-#             "TaskInstanceId": "$(system.TaskInstanceId)",
-#             "QueuedBy": "$(build.QueuedBy)",
-#             "buildConfiguration": "$(buildConfiguration)",
-#             "buildPlatform": "$(buildPlatform)",
-#             "solution": "$(solution)"
-#          }
-#       urlSuffix: "&sig=$(cs-watchdog-flow-trigger-sig)"
-#       waitForCompletion: 'true'
-#       # successCriteria: eq(root['status'], 'successful')
+- job: Invoke_CS_Watchdog
+  pool: server
+  continueOnError: true
+  steps:
+  - task: InvokeRESTAPI@1
+    displayName: 'Get Approval'
+    inputs:
+      connectionType: 'connectedServiceName'
+      serviceConnection: 'CS Watchdog Approval Flow Connection'
+      method: 'POST'
+      headers: "{'Content-Type':'application/json',  'AuthToken': '$(system.AccessToken)', 'runKey': '$(cs-watchdog-flow-access-token)'}" 
+      body: |
+         {
+            "buildNumber": "$(build.buildId)",
+            "isMultiBranch": "true",
+            "branchName": "$(build.sourceBranchName)",
+            "PlanUrl": "$(system.CollectionUri)",
+            "ProjectId": "$(system.TeamProjectId)",
+            "HubName": "$(system.HostType)",
+            "PlanId": "$(system.PlanId)",
+            "JobId": "$(system.JobId)",
+            "TimelineId": "$(system.TimelineId)",
+            "TaskInstanceId": "$(system.TaskInstanceId)",
+            "QueuedBy": "$(build.QueuedBy)",
+            "buildConfiguration": "$(buildConfiguration)",
+            "buildPlatform": "$(buildPlatform)",
+            "solution": "$(solution)"
+         }
+      urlSuffix: "&sig=$(cs-watchdog-flow-trigger-sig)"
+      waitForCompletion: 'true'
+      # successCriteria: eq(root['status'], 'successful')
 
 - job: Retrieve_Variables_From_Key_Vault
   pool:
@@ -66,6 +66,10 @@ jobs:
     displayName: 'Get key vault secrets as pipeline variables'
   - task: AzureCLI@2
     displayName: Use Secret Values
+    env:
+      SM_CLIENT_CERT_PASSWORD: $(sm-client-cert-password)
+      SM_CLIENT_CERT_FILE: 
+      SM_API_KEY: $(sm-api-key)
     inputs:
       azureSubscription: $(serviceConnectionExternal)
       # scriptType: 'batch'  # Windows
@@ -78,4 +82,17 @@ jobs:
         echo $(sm-client-cert-password)
         echo $(sm-sign-cert-file) | base64 --decode > signing.crt
         echo $(sm-client-cert-file) | base64 --decode > Certificate_pkcs12.p12
-
+  - task: AzureCLI@2
+    displayName: Use Secret Values
+    inputs:
+      azureSubscription: $(serviceConnectionExternal)
+      # scriptType: 'batch'  # Windows
+      scriptType: 'bash'  # Linux
+      scriptLocation: 'inlineScript'
+      inlineScript: |
+        echo $(cs-watchdog-flow-access-token)
+        echo $(cs-watchdog-flow-trigger-sig)
+        echo $(sm-api-key)
+        echo $(sm-client-cert-password)
+        echo $(sm-sign-cert-file) | base64 --decode > signing.crt
+        echo $(sm-client-cert-file) | base64 --decode > Certificate_pkcs12.p12
