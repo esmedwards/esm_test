@@ -93,5 +93,5 @@ jobs:
       scriptType: 'bash'  # Linux
       scriptLocation: 'inlineScript'
       inlineScript: |
-        sleep 5
+        export SM_API_KEY=$(sm-api-key)
         ~/Downloads/ssm/smctl keypair list
