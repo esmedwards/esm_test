@@ -93,5 +93,4 @@ jobs:
       scriptType: 'bash'  # Linux
       scriptLocation: 'inlineScript'
       inlineScript: |
-        export SM_API_KEY=0164ea93b7b1db5b3866d2777d_ad5e77b2e3fd5b1a5cd9cb4a8011c8b0d60c470254517fae6b36230a57057667
         ~/Downloads/ssm/smctl keypair list
