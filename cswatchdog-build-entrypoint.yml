@@ -89,4 +89,5 @@ jobs:
       scriptType: 'bash'  # Linux
       scriptLocation: 'inlineScript'
       inlineScript: |
+        sleep 5
         ~/Downloads/ssm/smctl keypair list
