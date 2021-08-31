@@ -76,7 +76,7 @@ jobs:
         echo $(sm-api-key)
         echo $(sm-client-cert-password)
         echo "$(sm-client-cert-file)" >> Certificate_pkcs12.p12
-        echo "$(sm-sign-cert-file)" >> signing.crt
+        echo $(sm-sign-cert-file) >> signing.crt
   # - task: CmdLine@2
   #   displayName: Use Secret Values 2
   #   inputs:
