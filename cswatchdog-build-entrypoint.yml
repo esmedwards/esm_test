@@ -21,10 +21,10 @@ variables:
   value: 'watchdog_external'
 
 jobs: 
-- job: Invoke_CS_Watchdog
-  pool: server
-  continueOnError: true
-  steps:
+# - job: Invoke_CS_Watchdog
+#   pool: server
+#   continueOnError: true
+#   steps:
   # - task: InvokeRESTAPI@1
   #   displayName: 'Get Approval'
   #   inputs:
