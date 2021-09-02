@@ -1,12 +1,5 @@
 trigger: none
 
-# resources:
-#   repositories:
-#     - repository: DevOps
-#       type: git
-#       name: 'Viewfinder Common/DevOps'
-#       ref: refs/heads/develop
-
 variables:
 - group: 'CS Watchdog Flow Variables'
 - name: solution
