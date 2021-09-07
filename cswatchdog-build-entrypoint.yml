@@ -7,7 +7,7 @@ variables:
 - name: buildPlatform
   value: 'Any CPU'
 - name: buildConfiguration
-  value: 'Debug'#'Release'
+  value: 'Release'
 - name: serviceConnection
   value: 'CS Watchdog Approval Flow Connection'
 - name: serviceConnectionExternal
